@@ -1,5 +1,7 @@
 
 import os
+from datetime import datetime
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -12,7 +14,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
     email = db.Column(db.String(120), unique=True)
 
@@ -25,7 +27,7 @@ class User(db.Model):
 
 class Post(db.Model):
     __tablename__ = 'post'
-    id = db.Column(db.Integer, primary_key=True)
+    pid = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
     body = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
@@ -52,4 +54,14 @@ class Category(db.Model):
     
     def __repr__(self):
         return '<Category %r>' % self.name
+
+class Session(db.Model):
+    session_id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.Integer)
+    create_time = db.Column(db.DateTime)
+    expire_time = db.Cloumn(db.DateTime)
+    site_id = db.Column()
+
+    def __init__(self):
+        pass
 
