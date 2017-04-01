@@ -59,7 +59,7 @@ class Session(db.Model):
     session_id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer)
     create_time = db.Column(db.DateTime)
-    expire_time = db.Cloumn(db.DateTime)
+    expire_time = db.Column(db.DateTime)
     site_id = db.Column()
 
     def __init__(self):
