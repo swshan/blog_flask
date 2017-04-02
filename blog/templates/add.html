@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block body %}
+  <h2>add.html</h2>
+  <div class="add_post">
+  <form action="{{ url_for('new') }}" method=post>
+    <div>
+      <label for="title">标题： </label>
+      <input type="text" name="title">
+    </div>
+    <div>
+      <label for="body">正文: </label>
+      <textarea name="body"></textarea>
+    </div>
+    <div>
+      <label for="category">分类：</label>
+      <input type="text" name="category">
+      <input type=submit value="提交">
+    </div>
+
+  </form>
+  </div>
+  <div class="post_list">
+    {% if entries%}
+    {% for entry in entries %}
+      
+      <li><h2>{{ entry.title }}</h2>{{entry.body|safe}}
+    {% endfor %}
+    {% endif %}
+  </div>
+{% endblock %}

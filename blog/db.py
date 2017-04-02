@@ -9,6 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
@@ -31,14 +32,15 @@ class Post(db.Model):
     title = db.Column(db.String(80))
     body = db.Column(db.Text)
     pub_date = db.Column(db.DateTime)
-    category = db.relationship('Category')    
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
+    category = db.relationship('Category',backref="post", )    
 
-    def __init__(self, title, body, category, pub_date=None):
+    def __init__(self, title, body, category_id, pub_date=None):
         self.title = title
         self.body = body
         if pub_date is None:
             pub_date = datetime.utcnow()
-        self.category = category
+        self.category_id = category_id
        
 
     def __repr__(self):
@@ -60,7 +62,6 @@ class Session(db.Model):
     uid = db.Column(db.Integer)
     create_time = db.Column(db.DateTime)
     expire_time = db.Column(db.DateTime)
-    site_id = db.Column()
 
     def __init__(self):
         pass
