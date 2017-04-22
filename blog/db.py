@@ -41,11 +41,17 @@ class Post(db.Model):
         if pub_date is None:
             pub_date = datetime.utcnow()
         self.category_id = category_id
-       
 
     def __repr__(self):
         return '<Post %s>' % (self.title)
 
+    def to_json(self):
+        return {
+            'pid': self.pid,
+            'title': self.title,
+            'body': self.body,
+            'pub_date': self.pub_date,
+        }
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)

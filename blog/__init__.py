@@ -1,5 +1,4 @@
 from flask import Flask
 
 app = Flask(__name__)
-
-import blog.view
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

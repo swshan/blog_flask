@@ -1,6 +1,9 @@
+
 from db import * 
 
-from flask import Flask, render_template, request
+import json
+
+from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
@@ -10,19 +13,22 @@ db.init_app(app)
 
 
 
-@app.route('/')
+@app.route('/api/v1/posts/get')
 def index():
-    return render_template('index.html')
+    posts = Post.query.all()
+    posts_list = [post.to_json() for post in posts]
+    return jsonify(result=posts_list)
+
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if request.method == 'POST':
         if request.form['body']:
-            post_title = request.form.get['title','null']
-            post_body = request.form.get['body', 'null']
-            post_pub_date = request.form.get['pub_date', 'null']
-            post_category = request.form.get['category', 'null']
-            new_post = Post(post_title, post_body, post_pub_date,  \
+            post_title = request.form.get('title')
+            post_body = request.form.get('body')
+            post_category = request.form.get('category', "untag")
+            print post_title
+            new_post = Post(post_title, post_body,  \
                     post_category)
             db.session.add(new_post)
             db.session.commit()
@@ -31,6 +37,7 @@ def new():
         args = request.args
         entries=Post.query.limit(10).all()        
         return render_template("add.html",entries=entries)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
