@@ -20,7 +20,7 @@ def index():
     return jsonify(result=posts_list)
 
 
-@app.route('/new', methods=['GET', 'POST'])
+@app.route('/admin/add', methods=['GET', 'POST'])
 def new():
     if request.method == 'POST':
         if request.form['body']:
