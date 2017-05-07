@@ -1,3 +1,19 @@
+
+html {
+    font-size: 1rem;
+}
+
+@media only screen and (min-width: 401px) {
+    
+    html {
+        font-size: 1rem;
+    }
+}
+
+@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+      html {font-size: 37.5px;}
+}
+
 body {
 	width: 100%;
 	display: block;
