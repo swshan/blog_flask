@@ -16,6 +16,7 @@ db.init_app(app)
 @app.route('/api/v1/posts/get')
 def index():
     posts = Post.query.all()
+
     posts_list = [post.to_json() for post in posts]
     return jsonify(result=posts_list)
 
@@ -27,7 +28,7 @@ def new():
             post_title = request.form.get('title')
             post_body = request.form.get('body')
             post_category = request.form.get('category', "untag")
-            print post_title
+             
             new_post = Post(post_title, post_body,  \
                     post_category)
             db.session.add(new_post)

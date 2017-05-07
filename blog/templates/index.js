@@ -14,6 +14,7 @@ function funcOne() {
 
 function test() {
     $.getJSON('/api/v1/posts/get', function(result) {
+            console.log(result.result);
             $.each(result.result, function(i, item) {
                     $('#primary_content').append(
                         "<div class='postlist_title'>" + item.title + "</div>" + 

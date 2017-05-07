@@ -1,6 +1,7 @@
 
 import os
 from datetime import datetime
+import re
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -46,6 +47,9 @@ class Post(db.Model):
         return '<Post %s>' % (self.title)
 
     def to_json(self):
+
+        self.body = self.body.replace("\r\n", "<br />")
+        
         return {
             'pid': self.pid,
             'title': self.title,
