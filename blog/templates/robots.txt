@@ -1,0 +1,4 @@
+# robots.txt for http://swsend.pw/
+
+User-agent: *
+Disallow: /admin/ # 
