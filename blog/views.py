@@ -13,7 +13,7 @@ db.init_app(app)
 
 
 
-@app.route('/api/v1/posts/get')
+@app.route('/api/v1/posts/get', methods=['GET'])
 def index():
     posts = Post.query.all()
 
