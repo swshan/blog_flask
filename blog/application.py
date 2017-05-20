@@ -5,17 +5,9 @@ from flask import Flask
 from blog.views import bp_views
 from blog.db import *
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-
 def create_app():
     app = Flask(__name__)
     app.register_blueprint(bp_views)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@127.0.0.1:3306/blog'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.init_app(app)
-    with app.app_context():
-        db.create_all()
-
 
     return app
 
