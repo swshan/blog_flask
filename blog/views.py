@@ -1,19 +1,13 @@
 
-from db import * 
+from blog.db import *
 
-import json
-
-from flask import Flask, render_template, request, jsonify
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'db.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+from flask import  Blueprint,render_template, request, jsonify
 
 
+bp_views = Blueprint('views', __name__, url_prefix="")
 
-@app.route('/api/v1/posts/get', methods=['GET'])
+
+@bp_views.route('/api/v1/posts/get', methods=['GET'])
 def index():
     posts = Post.query.all()
 
@@ -21,7 +15,7 @@ def index():
     return jsonify(result=posts_list)
 
 
-@app.route('/admin/add', methods=['GET', 'POST'])
+@bp_views.route('/admin/add', methods=['GET', 'POST'])
 def new():
     if request.method == 'POST':
         if request.form['body']:
@@ -39,6 +33,3 @@ def new():
         entries=Post.query.limit(10).all()        
         return render_template("add.html",entries=entries)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
