@@ -9,6 +9,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 packaging==16.8
+PyMySQL==0.7.11
 pyparsing==2.2.0
 six==1.10.0
 SQLAlchemy==1.1.9
