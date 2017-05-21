@@ -32,8 +32,8 @@ class Post(db.Model):
     def __init__(self, title, body, category_id, pub_date=None):
         self.title = title
         self.body = body
-        if pub_date is None:
-            pub_date = datetime.utcnow()
+        
+        pub_date = datetime.utcnow()
         self.category_id = category_id
 
     def __repr__(self):

@@ -1,16 +1,33 @@
 $(document).ready(function() {
     test();
+    funcOne();
     console.log("document ready.");
 });
 
 $(window).load(function(){
     console.log("onload");
-    funcOne();
+    
 });
 
 function funcOne() {
+    $('a.btn').on('click', function(evt) {
+    evt.preventDefault();
+    var post_id = $(this).attr('id');
+    console.log(post_id);
+    $.ajax({
+        url: '/api/v1/post/delete/' + post_id,
+        type: "POST",
+        dataType: "JSON",
+        success:function(resp) {
+            location.reload()
+        }
+      })
+    });
+};
 
-}
+$('a').bind('click', function(eventa) {
+    console.log("a is clicked");
+});
 
 function test() {
     $.getJSON('/api/v1/posts/get', function(result) {
@@ -26,4 +43,7 @@ function test() {
         } // function result
       
     ); // getjson
-} // test
+}; // test
+
+// add.html delect post 事件处理
+

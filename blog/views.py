@@ -1,3 +1,6 @@
+#coding=utf-8
+
+import json
 
 from blog.db import *
 
@@ -33,3 +36,11 @@ def new():
         entries=Post.query.limit(10).all()        
         return render_template("add.html",entries=entries)
 
+@bp_views.route('/api/v1/post/delete/<int:post_id>', methods=['POST'])
+def post_delete(post_id):
+    post = Post.query.get(post_id)
+    if post:
+        db.session.delete(post)
+        db.session.commit()
+    
+    return jsonify(result="done")
