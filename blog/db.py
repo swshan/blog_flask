@@ -1,71 +1,62 @@
+# coding=utf-8
+import datetime
 
-import os
-from datetime import datetime
-import re
+from sqlalchemy import create_engine
+from sqlalchemy import Table, Column, MetaData
+from sqlalchemy import BigInteger, DateTime, String, CHAR, Text, Integer,ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship, backref
 
-from flask_sqlalchemy import SQLAlchemy
+BaseModel = declarative_base()
+#session_engine = create_engine('sqlite://dbuser:password@localhost:5432/mydb')
 
-db = SQLAlchemy()
+session_engine = create_engine('postgresql://dbuser:password@localhost:5432/mydb')
+Session = sessionmaker(session_engine)
+session = Session()
 
-class User(db.Model):
+class User(BaseModel):
     __tablename__ = 'user'
-    uid = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True)
-    email = db.Column(db.String(120), unique=True)
 
-    def __init__(self, username, email):
-        self.username = username
-        self.email = email
-    
-    def __repr__(self):
-        return '<User %r>' % self.username
+    user_id = Column(CHAR(64), primary_key=True)
+    name = Column(String(32), server_default='', nullable=False)
+    email = Column(String(32), server_default='', nullable=False)
 
-class Post(db.Model):
+class Post(BaseModel):
     __tablename__ = 'post'
-    pid = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(80))
-    body = db.Column(db.Text)
-    pub_date = db.Column(db.DateTime)
-    category_id = db.Column(db.Integer, db.ForeignKey("category.id"))
-    category = db.relationship('Category',backref="post", )    
+    
+    post_id = Column(Integer, primary_key=True,autoincrement=True)
+    title = Column(String(128))
+    body = Column(String(2048))
+    #category_id = Column()
+    category = Column(Text())
+    pub_date = Column(DateTime())
 
-    def __init__(self, title, body, category_id, pub_date=None):
+    def __init__(self, title, body, category, pub_date):
         self.title = title
         self.body = body
-        
-        pub_date = datetime.utcnow()
-        self.category_id = category_id
-
-    def __repr__(self):
-        return '<Post %s>' % (self.title)
+        self.category = category
+        if self.pub_date is None:
+            self.pub_date = datetime.date.today()
+        self.pub_date = datetime.date.today()
 
     def to_json(self):
 
-        self.body = self.body.replace("\r\n", "<br />")
-        
-        return {
-            'pid': self.pid,
-            'title': self.title,
-            'body': self.body,
-            'pub_date': self.pub_date,
-        }
+    	return {
+    	    'pid': self.post_id,
+    	    'title': self.title,
+    	    'body': self.body,
+            'date': pub_date,
+            'category': category
+    	}
 
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+class Categories(BaseModel):
+    __tablename__ = 'category'
 
-    def __init__(self, name):
-        self.name = name
+    category_id = Column(Integer, primary_key=True)
+    category = Column(String(128))
     
-    def __repr__(self):
-        return '<Category %r>' % self.name
 
-class Session(db.Model):
-    session_id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer)
-    create_time = db.Column(db.DateTime)
-    expire_time = db.Column(db.DateTime)
 
-    def __init__(self):
-        pass
+if __name__ == '__main__':
+	BaseModel.metadata.create_all(session_engine)
 
