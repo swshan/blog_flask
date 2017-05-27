@@ -53,4 +53,4 @@ function funcdom() {
   document.getElementById('primary_content').innerHTML = div;
 };
 
-setTimeout('funcdom()',3000);
+setTimeout('funcdom()',1000);
