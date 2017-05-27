@@ -45,8 +45,8 @@ class Post(BaseModel):
     	    'pid': self.post_id,
     	    'title': self.title,
     	    'body': self.body,
-            'date': pub_date,
-            'category': category
+            'date': self.pub_date,
+            'category': self.category
     	}
 
 class Categories(BaseModel):
