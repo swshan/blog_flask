@@ -43,9 +43,9 @@ def new():
 
 @bp_views.route('/api/v1/post/delete/<int:post_id>', methods=['POST'])
 def post_delete(post_id):
-    post = Post.query.get(post_id)
+    post = session.query(Post).filter(Post.post_id == post_id)
     if post:
-        db.session.delete(post)
-        db.session.commit()
+        post.delete()
+        session.commit()
     
     return jsonify(result="done")
