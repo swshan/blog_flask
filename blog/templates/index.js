@@ -43,6 +43,9 @@ function test() {
         } // function result
       
     ); // getjson
+    div =  document.getElementById('primary_content').innerHTML;
+    div = div.replace( /\n/g, "<br \>" );
+    document.getElementById('primary_content').innerHTML = div;
 }; // test
 
 // add.html delect post 事件处理
