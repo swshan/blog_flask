@@ -3,11 +3,16 @@ html {
     font-size: 1rem;
 }
 
+/* small screen ------- */
+@media (min-width: 360px) {
+  html {
+    font-size: 1.0em;
+  }
+}
     
 /* Nexus 5  ----------- */
-@media screen and (device-width: 360px) and (device-height: 592px) and (-webkit-device-pixel-ratio: 1.0) {
-    html {font-size: 1.15rem;}
-}
+
+
 
 /* iPhone 6+  ----------- */
 @media only screen 
