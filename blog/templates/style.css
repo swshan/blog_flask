@@ -3,22 +3,55 @@ html {
     font-size: 1rem;
 }
 
-@media only screen and (min-width: 401px) {
     
+/* Nexus 5  ----------- */
+@media screen and (device-width: 360px) and (device-height: 592px) and (-webkit-device-pixel-ratio: 3) {
+    html {font-size: 1rem;}
+}
+
+/* iPhone 6+  ----------- */
+@media only screen 
+    and (min-device-width : 375px) // or 213.4375em
+    and (max-device-width : 667px) // or 41.6875em
+    and (width : 375px) // or 23.4375em
+    and (height : 559px) // or 34.9375em
+    and (orientation : portrait) 
+    and (color : 8)
+    and (device-aspect-ratio : 375/667)
+    and (aspect-ratio : 375/559)
+    and (device-pixel-ratio : 2)
+    and (-webkit-min-device-pixel-ratio : 2)
+{
+    html {font-size: 1rem;}
+}
+
+
+body {
+nly screen 
+    and (min-device-width : 414px) 
+    and (max-device-width : 736px)
+    and (device-width : 414px)
+    and (device-height : 736px)
+    and (orientation : portrait) 
+    and (-webkit-min-device-pixel-ratio : 3) 
+    and (-webkit-device-pixel-ratio : 3)
+{ 
     html {
         font-size: 1rem;
     }
 }
 
-@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
-      html {font-size: 37.5px;}
+
+/* Nexus 7 (landscape) ----------- */
+@media only screen and (min-width : 604px) and (orientation: landscape) {
+    html { font-size: 1rem; }
 }
 
-body {
-	width: 100%;
-	display: block;
-
+/* Nexus 7 (portrait) ----------- */
+@media only screen and (max-width : 603px) and (orientation: portrait) { 
+    html { font-size: 1rem; }
 }
+
 
 a {
 	color: #c9cacc;
