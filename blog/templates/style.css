@@ -8,7 +8,7 @@ html {
 @media (min-width: 360px) {
     html {
       width: 100%;
-      font-size: 1.125rem;
+      font-size: 1rem;
     }
 }
     
@@ -20,7 +20,7 @@ html {
   and (-webkit-device-pixel-ratio: 3) {
     html {
       width: 100%;
-      font-size: 1.125rem;
+      font-size: 1rem;
     }
     
 }
@@ -80,7 +80,7 @@ a {
 
 #primary_content {
   
-  width: 65%;
+  width: 85%;
   max-width: 960px;
   margin: 1pc auto;
   padding-top: 0;	
