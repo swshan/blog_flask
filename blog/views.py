@@ -15,6 +15,7 @@ bp_views = Blueprint('views', __name__, url_prefix="")
 @bp_views.route('/api/v1/posts/get', methods=['GET'])
 def index():
     posts = session.query(Post).all()
+    session.close()
 
     posts_list = [post.to_json() for post in posts]
     return jsonify(result=posts_list)
@@ -31,7 +32,10 @@ def new():
             new_post = Post(title=post_title, body=post_body,  \
                     category=post_category, pub_date=None)
             session.add(new_post)
-            session.commit()
+            try:
+                session.commit()
+            except:
+                session.rollback()
             return 'OK'
     else:
         args = request.args
