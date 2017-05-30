@@ -10,7 +10,7 @@ from sqlalchemy.orm import scoped_session ,sessionmaker, relationship, backref
 BaseModel = declarative_base()
 #session_engine = create_engine('sqlite://dbuser:password@localhost:5432/mydb')
 
-session_engine = create_engine('postgresql://dbuser:password@localhost:5432/mydb',  client_encoding='utf8')
+session_engine = create_engine('postgresql://dbuser:password@localhost:5432/mydb',  client_encoding='utf8',pool_recycle = 65)
 Session = scoped_session(sessionmaker(session_engine))
 session = Session()
 
