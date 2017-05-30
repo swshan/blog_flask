@@ -1,18 +1,41 @@
 
 html {
-    font-size: 1rem;
+    font-size: 1.125rem;
+    width: 100%;
 }
 
 /* small screen ------- */
 @media (min-width: 360px) {
-  html {
-    font-size: 1.0em;
-  }
+    html {
+      width: 100%;
+      font-size: 1.125rem;
+    }
 }
     
 /* Nexus 5  ----------- */
 
-
+@media screen
+  and (device-width: 360px)
+  and (device-height: 592px)
+  and (-webkit-device-pixel-ratio: 3) {
+    html {
+      width: 100%;
+      font-size: 1.125rem;
+    }
+    
+}
+ 
+/* Portrait */
+@media screen
+  and (device-width: 360px)
+  and (device-height: 592px)
+  and (-webkit-device-pixel-ratio: 3)
+  and (orientation: portrait) {
+    html {
+      width: 100%;
+      font-size: 1.125rem;
+    } 
+}
 
 /* iPhone 6+  ----------- */
 @media only screen 
@@ -37,7 +60,7 @@ html {
 
 /* Nexus 7 (portrait) ----------- */
 @media only screen and (max-width : 603px) and (orientation: portrait) { 
-    html { font-size: 1.12rem; }
+    html { font-size: 1.25rem; }
 }
 
 
@@ -57,7 +80,8 @@ a {
 
 #primary_content {
   
-  width: 50rem;
+  width: 65%;
+  max-width: 960px;
   margin: 1pc auto;
   padding-top: 0;	
   color: #000;
