@@ -22,17 +22,17 @@ html {
     and (device-pixel-ratio : 2)
     and (-webkit-min-device-pixel-ratio : 2)
 {
-    html {font-size: 1rem;}
+    html {font-size: 1.12rem;}
 }
 
 /* Nexus 7 (landscape) ----------- */
 @media only screen and (min-width : 604px) and (orientation: landscape) {
-    html { font-size: 1rem; }
+    html { font-size: 1.12rem; }
 }
 
 /* Nexus 7 (portrait) ----------- */
 @media only screen and (max-width : 603px) and (orientation: portrait) { 
-    html { font-size: 1rem; }
+    html { font-size: 1.12rem; }
 }
 
 
