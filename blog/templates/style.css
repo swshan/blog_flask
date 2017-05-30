@@ -17,8 +17,6 @@ html {
 body {
 	width: 100%;
 	display: block;
-	background-color: #3b3c40;
-	color: #c9cacc;
 
 }
 
@@ -37,13 +35,18 @@ a {
 }
 
 #primary_content {
-	width: 100%;
-	
+  
+  width: 80rem;
+  min-width: 48rem;
+  margin: 1pc auto;
+  padding-top: 0;	
+  color: #000;
+
 }
 
 .postlist_title {
     text-decoration: none;
-    color: #f6f6f6;
+    color: #444;
     text-align: center;
     padding: 10px;
     font-size: 1.2em;
@@ -56,12 +59,12 @@ a {
 }
 
 .footer {
-  
+   display: none;
    font-size: 0.8125rem;
-   position: fixed;
+   position: ;
    bottom:0;
    width:100%;
    height:3rem;
-   background-color: #33383d;
+   color: #333;
 
 }
