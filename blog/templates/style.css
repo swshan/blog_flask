@@ -5,8 +5,8 @@ html {
 
     
 /* Nexus 5  ----------- */
-@media screen and (device-width: 360px) and (device-height: 592px) and (-webkit-device-pixel-ratio: 3) {
-    html {font-size: 1rem;}
+@media screen and (device-width: 360px) and (device-height: 592px) and (-webkit-device-pixel-ratio: 1.0) {
+    html {font-size: 1.1rem;}
 }
 
 /* iPhone 6+  ----------- */
@@ -20,7 +20,7 @@ html {
     and (device-aspect-ratio : 375/667)
     and (aspect-ratio : 375/559)
     and (device-pixel-ratio : 2)
-    and (-webkit-min-device-pixel-ratio : 2)
+    and (-webkit-min-device-pixel-ratio : 1.0)
 {
     html {font-size: 1.12rem;}
 }
