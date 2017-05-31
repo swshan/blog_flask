@@ -42,14 +42,8 @@ class Post(BaseModel):
         self.pub_date = datetime.date.today()
 
     def to_json(self):
+        return { c.name: getattr(self, c.name) for c in self.__table__.columns }
 
-    	return {
-    	    'pid': self.post_id,
-    	    'title': self.title,
-    	    'body': self.body,
-            'date': self.pub_date,
-            'category': self.category
-    	}
 
 class Categories(BaseModel):
     __tablename__ = 'category'
