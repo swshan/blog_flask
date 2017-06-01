@@ -1,6 +1,6 @@
 
 html {
-    font-size: 1.125rem;
+    font-size: 1rem;
     width: 100%;
 }
 
@@ -20,7 +20,7 @@ html {
   and (-webkit-device-pixel-ratio: 3) {
     html {
       width: 100%;
-      font-size: 1rem;
+      font-size: 0.8125rem;
     }
     
 }
@@ -50,7 +50,7 @@ html {
     and (device-pixel-ratio : 2)
     and (-webkit-min-device-pixel-ratio : 1.0)
 {
-    html {font-size: 1.12rem;}
+    html {font-size: 0.8125rem;}
 }
 
 /* Nexus 7 (landscape) ----------- */
@@ -80,9 +80,9 @@ a {
 
 #primary_content {
   
-  width: 85%;
+  width: 95%;
   max-width: 960px;
-  margin: 1pc auto;
+  margin: 1rem auto;
   padding-top: 0;	
   color: #000;
 
@@ -98,7 +98,7 @@ a {
 }
 
 .postlist_body {
-	font-size: 1em;
+	font-size: 0.8125em;
 	padding: 1em;
 }
 
