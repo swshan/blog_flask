@@ -2,14 +2,25 @@
 
 import json
 
-from blog.db import *
+from blog.db import session, Post
 
-from flask import  Blueprint,render_template, request, jsonify
+from flask import  Blueprint, render_template, request, jsonify
 from sqlalchemy.sql import select
 
 
 
 bp_views = Blueprint('views', __name__, url_prefix="")
+
+'''
+def jsonify(**kwwargs):
+    response = make_response(json.dumps(kwargs))
+    response.header['Content-Type'] = 'application/json; charset=utf-8'
+    response.last_modified = 
+'''
+
+def cache_header():
+    ''' todo header cache function '''
+    pass
 
 
 @bp_views.route('/api/v1/posts/get', methods=['GET'])
@@ -42,8 +53,8 @@ def new():
         page = args.get('page', 1)
         page = int(page)
         offset = (page - 1)*10
-        entries=session.query(Post).offset(offset).limit(10).all()     
-        return render_template("add.html",entries=entries)
+        entries = session.query(Post).offset(offset).limit(10).all()     
+        return render_template("add.html", entries=entries)
 
 @bp_views.route('/api/v1/post/delete/<int:post_id>', methods=['POST'])
 def post_delete(post_id):
