@@ -29,6 +29,7 @@ def index():
     session.close()
 
     posts_list = [post.to_json() for post in posts]
+    print jsonify(result=posts_list)
     return jsonify(result=posts_list)
 
 

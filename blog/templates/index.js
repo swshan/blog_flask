@@ -31,9 +31,9 @@ $('a').bind('click', function(eventa) {
 });
 
 function test() {
-    $.getJSON('/api/v1/posts/get', function(result) {
-            console.log(result.result);
-            $.each(result.result, function(i, item) {
+    $.getJSON('http://localhost/golang/test/', function(result) {
+            console.log(result);
+            $.each(result.result.result, function(i, item) {
                     $('#primary_content').append(
                         "<div class='postlist_title'>" + item.title + "</div>" + 
                         "<div class='postlist_body'>" + item.body + "</div>"
