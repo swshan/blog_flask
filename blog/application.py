@@ -2,8 +2,7 @@
 import os
 
 from flask import Flask
-from blog.views import bp_views
-from blog.db import *
+from blog.views.views import bp_views
 
 #vars
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -26,4 +25,4 @@ app = create_app()
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5000, debug=False)
+    app.run(host='127.0.0.1', port=5000, debug=True)

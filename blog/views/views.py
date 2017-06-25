@@ -2,9 +2,9 @@
 
 import json
 
-from blog.db import session, Post
+from blog.models.db import session, Post
 
-from flask import  Blueprint, render_template, request, jsonify
+from flask import  Blueprint, render_template, request, jsonify, url_for, redirect
 from sqlalchemy.sql import select
 
 
@@ -47,14 +47,18 @@ def new():
                 session.commit()
             except:
                 session.rollback()
-            return 'OK'
+            source = "123"
+            return redirect('/admin/add/<string:source>', source)
     else:
         args = request.args
         page = args.get('page', 1)
         page = int(page)
         offset = (page - 1)*10
         entries = session.query(Post).offset(offset).limit(10).all()     
-        return render_template("add.html", entries=entries)
+        mydict = {
+                  'key1': 'value1' 
+                 }
+        return render_template("add.html", entries=entries, mydict = mydict)
 
 @bp_views.route('/api/v1/post/delete/<int:post_id>', methods=['POST'])
 def post_delete(post_id):
