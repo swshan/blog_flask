@@ -13,6 +13,7 @@ def create_app(debug=settings.DEBUG):
     app = Flask(__name__)
     app.register_blueprint(bp_views)
     app.debug = debug
+    app.secret_key = 'Idontknowjs'
 
     with app.app_context():
         # Extensions like Flask-SQLAlchemy now know what the "current" app

@@ -14,7 +14,7 @@ BaseModel = declarative_base()
 
 session_engine = create_engine('postgresql+psycopg2://dbuser:password@localhost:5432/mydb',  client_encoding='utf8',poolclass=QueuePool )
 Session = scoped_session(sessionmaker(session_engine))
-session = Session()
+## session = Session()
 
 class User(BaseModel):
     __tablename__ = 'user'
