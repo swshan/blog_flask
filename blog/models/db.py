@@ -19,9 +19,19 @@ Session = scoped_session(sessionmaker(session_engine))
 class User(BaseModel):
     __tablename__ = 'user'
 
-    user_id = Column(CHAR(64), primary_key=True)
+    user_id = Column(String(64), primary_key=True)
     name = Column(String(32), server_default='', nullable=False)
+    password = Column(String(32), server_default='', nullable=False)
     email = Column(String(32), server_default='', nullable=False)
+
+class UserSession(BaseModel):
+    __tablename__ = 'usersession'
+
+    session_id = Column(String(32), primary_key=True)
+    user_id = Column(BigInteger, index=True, nullable=False)
+    create_time = Column(DateTime)
+    expire_time = Column(DateTime)
+
 
 class Post(BaseModel):
     __tablename__ = 'post'
