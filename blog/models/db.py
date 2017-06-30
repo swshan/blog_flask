@@ -19,7 +19,7 @@ Session = scoped_session(sessionmaker(session_engine))
 class User(BaseModel):
     __tablename__ = 'user'
 
-    user_id = Column(String(64), primary_key=True)
+    user_id = Column(String(64), primary_key=True, autoincrement=True)
     name = Column(String(32), server_default='', nullable=False)
     password = Column(String(32), server_default='', nullable=False)
     email = Column(String(32), server_default='', nullable=False)

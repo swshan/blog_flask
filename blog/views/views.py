@@ -2,7 +2,7 @@
 
 import json
 
-from blog.models.db import Session, Post
+from blog.models.db import Session, Post, User, UserSession
 
 from flask import  Blueprint, render_template, request, jsonify, url_for,  \
                      redirect, session
@@ -43,18 +43,16 @@ def new():
                 Session.commit()
             except:
                 Session.rollback()
-            source = "123"
-            return redirect('/admin/add/<string:source>', source)
+            
+            return redirect('/admin/add/')
     else:
         args = request.args
         page = args.get('page', 1)
         page = int(page)
         offset = (page - 1)*10
         entries = Session.query(Post).offset(offset).limit(10).all()     
-        mydict = {
-                  'key1': 'value1' 
-                 }
-        return render_template("add.html", entries=entries, mydict = mydict)
+
+        return render_template("add.html", entries=entries)
 
 @bp_views.route('/api/v1/post/delete/<int:post_id>', methods=['POST'])
 def post_delete(post_id):
@@ -68,13 +66,24 @@ def post_delete(post_id):
 @bp_views.route('/user/login/', methods=['GET', 'POST'])
 def login_page():
     if request.method == 'POST':
-        session['username'] = request.form['username']
+        username = request.form['username']
+        password = request.form['password']
+        if username and password is None:
+            abort(400)
+        user = Session.query(User).\
+                         filter(User.name==username).one()
+        if user is None:
+            abort(400)
+        if user.name == username and user.password == password:
+            session['username'] = user.name
+
         print ("session done")
         return redirect('/')
     else:
         return '''
             <form action="" method="post">
                 <p><input type=text name="username">
+                <p><input type=text name="password">
                 <p><input type=submit value=Lgoin>
             </form>
           '''
