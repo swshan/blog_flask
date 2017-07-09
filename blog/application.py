@@ -28,7 +28,7 @@ app = create_app(settings.DEBUG)
 
 if __name__ == '__main__':
     app.config['SESSION_TYPE'] = 'redis'
-    app.config['SECRET_KEY'] = '123'
+    app.config['SECRET_KEY'] = settings.SECRET_KEY
     sess = SESSION()
     SESSION_TYPE = 'redis'
     sess.init_app(app)
