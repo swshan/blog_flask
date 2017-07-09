@@ -7,7 +7,6 @@ from blog.models.db import Session, Post, User, UserSession
 from flask import  Blueprint, render_template, request, jsonify, url_for,  \
                      redirect, session
 from sqlalchemy.sql import select
-from flask.ext.session import Session as SESSION
 
 
 bp_views = Blueprint('views', __name__, url_prefix="")
@@ -74,11 +73,9 @@ def login_page():
                          filter(User.name==username).one()
         if user is None:
             abort(400)
-        if user.name == username and user.password == password:
-            SESSION['username'] = user.name
-
+        session['username'] = user.name
         print ("session done")
-        return redirect('/')
+        return redirect('/admin/add')
     else:
         return '''
             <form action="" method="post">
