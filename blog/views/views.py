@@ -8,9 +8,11 @@ from flask import  Blueprint, render_template, request, jsonify, url_for,  \
                      redirect, session
 from sqlalchemy.sql import select
 
+from blog.views.utils import LRUCache
 
 bp_views = Blueprint('views', __name__, url_prefix="")
 
+cache = LRUCache(length=2)
 
 def cache_header():
     ''' todo header cache function '''
@@ -19,12 +21,18 @@ def cache_header():
 
 @bp_views.route('/api/v1/posts/get', methods=['GET'])
 def posts_get():
-    posts = Session.query(Post).all()
-    Session.close()
-
-    posts_list = [post.to_json() for post in posts]
-    print (jsonify(result=posts_list))
-    return jsonify(result=posts_list)
+    if cache.get('key1') != -1:
+        posts_list = cache.get('key1')
+        return jsonify(result=posts_list)        
+    else:
+        posts = Session.query(Post).all()
+        Session.close()
+    
+        posts_list = [post.to_json() for post in posts]
+        cache.set('key1', posts_list)
+        print (jsonify(result=posts_list))
+        print (cache.get('key1'))
+        return jsonify(result=posts_list)
 
 
 @bp_views.route('/admin/add', methods=['GET', 'POST'])

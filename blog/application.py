@@ -32,4 +32,4 @@ if __name__ == '__main__':
     sess = SESSION()
     SESSION_TYPE = 'redis'
     sess.init_app(app)
-    app.run(host='127.0.0.1', port=5000) 
+    app.run(host='127.0.0.1', port=5001) 
