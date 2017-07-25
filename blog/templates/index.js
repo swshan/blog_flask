@@ -42,8 +42,9 @@ function test() {
 
             ); // each
         } // function result
-      
-    ); // getjson
+    ).done(function() {
+      funcdom();
+      }); // getjson
 }; // test
 
 function funcdom() {
@@ -53,4 +54,3 @@ function funcdom() {
   document.getElementById('primary_content').innerHTML = div;
 };
 
-setTimeout('funcdom()',1000);
