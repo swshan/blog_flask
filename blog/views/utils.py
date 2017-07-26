@@ -1,29 +1,51 @@
 #coding=utf-8
 
-class LRUCache:
+from time import time
+
+class LRUCache(object):
 
     # @param length, an integer
-    def __init__(self, length):
+    def __init__(self, length, expiration=6):
         self.cache = {}
-        self.used_list = []
+        self.l = []
         self.length = length
+        self.expiration = expiration
 
     # return an integer
     def get(self, key):
-        if key in self.cache:
-            if key != self.used_list[-1]:
-                self.used.remove(key)
-                self.used_list.append(key)
-            return self.cache[key]
+        self.cleanup()
+        if self.cache.has_key(key):
+            item = self.cache[key]
         else:
-            return -1
+            item = None
+        return item
+
     # @param key, an integer
     # @param value, an integer
     def set(self, key, value):
-        if key in self.cache:
-            self.used_list.remove(key)
+        self.cleanup()
+        if self.cache.has_key(key):
+            self.l.remove(key)
         elif len(self.cache) == self.length:
-            self.cache.pop(self.used_list.pop(0))
-        self.used_list.append(key)
-        self.cache[key] = value
+            self.cache.pop(self.l.pop(0))
+        t = int(time())
+        self.l.append(key)
+        self.cache[key] = {'item': value,
+                           'access_times': t,
+                           'expiration_times': t + self.expiration
+                          }
+        print ('set cache %s',  self.cache[key])
 
+    def cleanup(self):
+        t = int(time())
+        # Del expired
+        for k in self.cache.keys():
+            print ('inside cleanup for')
+            if self.cache[k]['expiration_times'] < t:
+                print ('inside cleanup if')
+                self.l.remove(k)
+                del self.cache[k]
+                print ('util list removed')
+
+    def info(self, key):
+        info = self.cache[key]

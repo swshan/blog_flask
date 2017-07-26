@@ -21,8 +21,8 @@ def cache_header():
 
 @bp_views.route('/api/v1/posts/get', methods=['GET'])
 def posts_get():
-    if cache.get('key1') != -1:
-        posts_list = cache.get('key1')
+    if cache.get('key1'):
+        posts_list = cache.get('key1')['item']
         return jsonify(result=posts_list)        
     else:
         posts = Session.query(Post).all()
@@ -30,8 +30,7 @@ def posts_get():
     
         posts_list = [post.to_json() for post in posts]
         cache.set('key1', posts_list)
-        print (jsonify(result=posts_list))
-        print (cache.get('key1'))
+        print ('query')
         return jsonify(result=posts_list)
 
 
