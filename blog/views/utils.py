@@ -5,7 +5,7 @@ from time import time
 class LRUCache(object):
 
     # @param length, an integer
-    def __init__(self, length, expiration=6):
+    def __init__(self, length, expiration=30*60):
         self.cache = {}
         self.l = []
         self.length = length
