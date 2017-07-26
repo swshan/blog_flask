@@ -5,7 +5,7 @@ from time import time
 class LRUCache(object):
 
     # @param length, an integer
-    def __init__(self, length, expiration=30*60):
+    def __init__(self, length, expiration=3):
         self.cache = {}
         self.l = []
         self.length = length
@@ -23,7 +23,6 @@ class LRUCache(object):
     # @param key, an integer
     # @param value, an integer
     def set(self, key, value):
-        self.cleanup()
         if key in self.cache:
             self.l.remove(key)
         elif len(self.cache) == self.length:
@@ -39,11 +38,12 @@ class LRUCache(object):
     def cleanup(self):
         t = int(time())
         # Del expired
-        for k in self.cache.keys():
-            print ('inside cleanup for')
+        for k in list(self.cache.keys()):
             if self.cache[k]['expiration_times'] < t:
                 print ('inside cleanup if')
-                self.l.remove(k)
+                print (self.l)
+                if self.l:
+                    self.l.pop(0)
                 del self.cache[k]
                 print ('util list removed')
 
