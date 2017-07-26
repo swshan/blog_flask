@@ -14,7 +14,7 @@ class LRUCache(object):
     # return an integer
     def get(self, key):
         self.cleanup()
-        if self.cache.has_key(key):
+        if key in self.cache:
             item = self.cache[key]
         else:
             item = None
@@ -24,7 +24,7 @@ class LRUCache(object):
     # @param value, an integer
     def set(self, key, value):
         self.cleanup()
-        if self.cache.has_key(key):
+        if key in self.cache:
             self.l.remove(key)
         elif len(self.cache) == self.length:
             self.cache.pop(self.l.pop(0))
@@ -34,7 +34,7 @@ class LRUCache(object):
                            'access_times': t,
                            'expiration_times': t + self.expiration
                           }
-        print ('set cache %s',  self.cache[key])
+        print ('set cache ')
 
     def cleanup(self):
         t = int(time())
