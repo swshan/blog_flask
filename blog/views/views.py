@@ -65,7 +65,7 @@ def post_delete(post_id):
     post = Session.query(Post).filter(Post.post_id == post_id)
     if post:
         post.delete()
-        session.commit()
+        Session.commit()
     
     return jsonify(result="done")
 
