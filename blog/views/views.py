@@ -47,6 +47,7 @@ def new():
             Session.add(new_post)
             try:
                 Session.commit()
+                cache.cleanup()
             except:
                 Session.rollback()
             
