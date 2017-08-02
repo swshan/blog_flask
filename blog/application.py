@@ -21,6 +21,14 @@ def create_app(debug=settings.DEBUG):
         # is while within this block. Therefore, you can now run........
         pass
 
+    if not app.debug:
+        import logging
+        from logging.handlers import SMTPHandler
+        args = (('smtp.126.com', 25), 'swcmail001@126.com',['swcmail001@126.com'],\
+          'app warning')
+        mail_handler = SMTPHandler(args)
+        mail_handler.setLevel(logging.ERROR)
+        mail_handler.addHandler(mail_handler)
     return app
 
 app = create_app(settings.DEBUG)
@@ -32,4 +40,4 @@ if __name__ == '__main__':
     sess = SESSION()
     SESSION_TYPE = 'redis'
     sess.init_app(app)
-    app.run(host='127.0.0.1', port=5001) 
+    app.run(host='127.0.0.1', port=5002) 
