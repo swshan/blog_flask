@@ -4,7 +4,6 @@ import os
 from flask import Flask
 from blog.views.views import bp_views
 from blog.configs import settings
-from flask_session import Session as SESSION
 
 #vars
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -37,7 +36,4 @@ app = create_app(settings.DEBUG)
 if __name__ == '__main__':
     app.config['SESSION_TYPE'] = 'redis'
     app.config['SECRET_KEY'] = settings.SECRET_KEY
-    sess = SESSION()
-    SESSION_TYPE = 'redis'
-    sess.init_app(app)
-    app.run(host=ettings.host, port=settings.port) 
+    app.run(host=settings.host, port=settings.port) 
